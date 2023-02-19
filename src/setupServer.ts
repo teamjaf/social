@@ -1,10 +1,15 @@
-import {Application, json, urlencoded, Response, Request, NextFunction} from 'express';
+import {Application, json, urlencoded, Response, Request, NextFunction} from 'express'
 import * as http from 'http'
-
-
+import cors from 'cors'
+import helmet from 'helmet'
+import hpp from 'hpp' 
+import cookierSession from 'cookie-session'
+import HTTP_STATUS from 'http-status-codes'
+import 'express-async-errors'
+ 
 export class ChattyServer{
     private app: Application
-
+ 
     constructor(app: Application){
         this.app = app
     }
@@ -18,7 +23,13 @@ export class ChattyServer{
 
     }
 
-    private securityMiddleware(app: Application): void {}
+    private securityMiddleware(app: Application): void {
+        app.use(
+            cookierSession({
+                
+            })
+        )
+    }
 
     private standardMiddleware(app: Application): void {} 
 
